@@ -1,6 +1,8 @@
-﻿using Scripts.Infrastructure.Services.Factories.Game;
+﻿using CarTonki.Scripts.Logic.CameraControl;
+using Scripts.Infrastructure.Services.Factories.Game;
 using Scripts.Infrastructure.Services.Factories.UI;
 using Scripts.Infrastructure.Services.SceneLoader;
+using Scripts.Logic.CameraControl;
 using Scripts.Logic.PlayerControl.SpawnControl;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -35,7 +37,15 @@ namespace Scripts.Infrastructure.Services.StateMachine.States
             _uiFactory.CreateUiRoot();
 
             InitPlayer();
+            InitCamera();
             _gameFactory.CreateHud();
+        }
+
+        private void InitCamera()
+        {
+            CameraStateChanger cameraStateChanger = _gameFactory.CreateCamera();
+            cameraStateChanger.Initialize();
+            cameraStateChanger.SwitchTo(CameraViewState.Default, _gameFactory.Player.transform);
         }
 
         private void InitPlayer()

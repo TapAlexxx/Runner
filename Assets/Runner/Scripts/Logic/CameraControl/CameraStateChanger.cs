@@ -1,8 +1,9 @@
 ﻿using System;
+using CarTonki.Scripts.Logic.CameraControl;
 using Cinemachine;
 using UnityEngine;
 
-namespace CarTonki.Scripts.Logic.CameraControl
+namespace Scripts.Logic.CameraControl
 {
     public class CameraStateChanger : MonoBehaviour
     {
@@ -10,13 +11,8 @@ namespace CarTonki.Scripts.Logic.CameraControl
         [SerializeField] private CinemachineVirtualCamera[] _virtualCameras;
 
         private int[] _virtualCamerasID;
-        
-        private Transform _target;
 
-        public void Initialize(Transform target) => 
-            _target = target;
-
-        private void Start() => 
+        public void Initialize() => 
             _virtualCamerasID = new int[_virtualCamerasObjects.Length];
 
         public void SwitchTo(CameraViewState viewState, Transform target)

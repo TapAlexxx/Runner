@@ -1,6 +1,8 @@
 ﻿using Scripts.Infrastructure.Services.InstantiatorService;
 using Scripts.Infrastructure.Services.StaticData;
 using Scripts.Infrastructure.Services.Window;
+using Scripts.Logic;
+using Scripts.Logic.CameraControl;
 using Scripts.StaticData.Player;
 using UnityEngine;
 
@@ -14,6 +16,7 @@ namespace Scripts.Infrastructure.Services.Factories.Game
         
         public GameObject Player { get; private set; }
         public GameObject Hud { get; private set; }
+        public CameraStateChanger CameraStateChanger { get; private set; }
 
 
         public GameFactory(IStaticDataService staticDataService, IInstantiator instantiator,
@@ -31,8 +34,15 @@ namespace Scripts.Infrastructure.Services.Factories.Game
 
             player.transform.position = spawnPointTransform.position;
             player.transform.rotation = spawnPointTransform.rotation;
-            
+
             Player = player;
+        }
+
+        public CameraStateChanger CreateCamera()
+        {
+            GameObject cineMachineCamera = _instantiator.InstantiateFromPath("CameraResources/Camera_container");
+            CameraStateChanger = cineMachineCamera.GetComponent<CameraStateChanger>();
+            return CameraStateChanger;
         }
 
         public GameObject CreateHud()
