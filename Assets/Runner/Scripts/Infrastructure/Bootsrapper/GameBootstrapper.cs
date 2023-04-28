@@ -5,6 +5,8 @@ using Scripts.Infrastructure.Services.SceneLoader;
 using Scripts.Infrastructure.Services.StateMachine;
 using Scripts.Infrastructure.Services.StateMachine.States;
 using Scripts.Infrastructure.Services.StaticData;
+using Scripts.Infrastructure.Services.Window;
+using Scripts.StaticData;
 using UnityEngine;
 
 namespace Scripts.Infrastructure.Bootsrapper
@@ -17,6 +19,7 @@ namespace Scripts.Infrastructure.Bootsrapper
         private GameStateMachine _gameStateMachine;
         private IUIFactory _uiFactory;
         private ISceneLoader _sceneLoader;
+        private IWindowService _windowService;
 
         private void Awake()
         {
@@ -28,13 +31,23 @@ namespace Scripts.Infrastructure.Bootsrapper
             _instantiator = SetupInstantiator();
             _sceneLoader = SetupSceneLoader();
             _staticDataService = SetupStaticDataService();
-            _gameFactory = SetupGameFactory();
-            _uiFactory = SetupUiFactory();
-            
+
+            _uiFactory = SetupUiFactory(_staticDataService, _instantiator);
+            _windowService = SetupWindowService(_uiFactory);
+            _gameFactory = SetupGameFactory(_staticDataService, _instantiator, _windowService);
+
+
             _gameStateMachine = SetupGameStateMachine();
-            BindStates();
             
-            _gameStateMachine.Enter<LoadLevelState, string>("SampleScene");
+            BindStates();
+
+            LoadInitialStartScene();
+        }
+
+        private void LoadInitialStartScene()
+        {
+            GameConfig gameConfig = _staticDataService.GetGameConfig();
+            _gameStateMachine.Enter<LoadLevelState, string>(gameConfig.StartScene);
         }
 
         private StaticDataService SetupStaticDataService()
@@ -43,6 +56,9 @@ namespace Scripts.Infrastructure.Bootsrapper
             staticDataService.Load();
             return staticDataService;
         }
+
+        private WindowService SetupWindowService(IUIFactory uiFactory) => 
+            new WindowService(uiFactory);
 
         private Instantiator SetupInstantiator() => 
             gameObject.AddComponent<Instantiator>();
@@ -66,10 +82,11 @@ namespace Scripts.Infrastructure.Bootsrapper
             return gameStateMachine;
         }
 
-        private IUIFactory SetupUiFactory() => 
-            new UIFactory(_staticDataService, _instantiator);
+        private IUIFactory SetupUiFactory(IStaticDataService staticDataService, IInstantiator instantiator) => 
+            new UIFactory(staticDataService, instantiator);
 
-        private IGameFactory SetupGameFactory() => 
-            new GameFactory(_staticDataService, _instantiator);
+        private IGameFactory SetupGameFactory(IStaticDataService staticDataService, IInstantiator instantiator,
+            IWindowService windowService) => 
+            new GameFactory(staticDataService, instantiator, windowService);
     }
 }

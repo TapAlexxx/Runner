@@ -2,8 +2,8 @@
 
 namespace Scripts.Logic
 {
-    public class Player : MonoBehaviour
+    public class PlayerTest : MonoBehaviour
     {
-
+        
     }
 }

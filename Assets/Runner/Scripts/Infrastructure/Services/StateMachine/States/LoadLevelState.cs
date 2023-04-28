@@ -24,27 +24,28 @@ namespace Scripts.Infrastructure.Services.StateMachine.States
 
         public override void Enter(string sceneName)
         {
+            Debug.Log("LoadLevelState");
             _sceneLoader.Load(sceneName, OnLevelLoaded);
-        }
-
-        private void OnLevelLoaded()
-        {
-            InitializeGameWorld();
-            Debug.Log("world normal");
-            _gameStateMachine.Enter<GameLoopState>();
         }
 
         private void InitializeGameWorld()
         {
             _gameFactory.Clear();
             _uiFactory.CreateUiRoot();
-            
+
             _gameFactory.CreatePlayer();
+            _gameFactory.CreateHud();
+        }
+
+        private void OnLevelLoaded()
+        {
+            InitializeGameWorld();
+            
+            _gameStateMachine.Enter<GameLoopState>();
         }
 
         public override void Exit()
         {
-            Debug.Log("Exit");
         }
     }
 

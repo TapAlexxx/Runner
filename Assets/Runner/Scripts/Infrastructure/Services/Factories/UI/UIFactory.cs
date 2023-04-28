@@ -23,7 +23,7 @@ namespace Scripts.Infrastructure.Services.Factories.UI
 
         public void CreateUiRoot()
         {
-            _uiRoot = _instantiator.InstantiateFromPath(UiRootPath).transform;
+            _uiRoot = _instantiator.CreateUiRoot(UiRootPath).transform;
         }
 
         public RectTransform CrateWindow(WindowTypeId windowTypeId)

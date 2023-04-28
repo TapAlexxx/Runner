@@ -4,9 +4,9 @@ namespace Scripts.Infrastructure.Services.Window
 {
     public class WindowService : IWindowService
     {
-        private IUIFactory _uiFactory;
+        private readonly IUIFactory _uiFactory;
 
-        public void Constructor(IUIFactory uiFactory)
+        public WindowService(IUIFactory uiFactory)
         {
             _uiFactory = uiFactory;
         }
