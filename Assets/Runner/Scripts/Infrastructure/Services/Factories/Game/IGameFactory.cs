@@ -2,6 +2,7 @@
 {
     public interface IGameFactory
     {
+        void CreatePlayer();
         void Clear();
     }
 }

@@ -35,7 +35,7 @@ namespace Scripts.Infrastructure
 
         private void AddStates()
         {
-            _gameStateMachine.AddState(new LoadLevelState());
+            _gameStateMachine.AddState(new LoadLevelState(_gameFactory, _gameStateMachine));
         }
 
         private void InitializeGameStateMachine()
