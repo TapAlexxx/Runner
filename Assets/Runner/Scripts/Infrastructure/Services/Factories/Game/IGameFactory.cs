@@ -6,7 +6,7 @@ namespace Scripts.Infrastructure.Services.Factories.Game
     {
         GameObject Player { get; }
         GameObject Hud { get; }
-        void CreatePlayer();
+        void CreatePlayer(Transform spawnPointTransform);
         void Clear();
         GameObject CreateHud();
     }

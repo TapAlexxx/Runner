@@ -1,7 +1,6 @@
 ﻿using Scripts.Infrastructure.Services.InstantiatorService;
 using Scripts.Infrastructure.Services.StaticData;
 using Scripts.Infrastructure.Services.Window;
-using Scripts.Logic;
 using Scripts.StaticData.Player;
 using UnityEngine;
 
@@ -25,11 +24,14 @@ namespace Scripts.Infrastructure.Services.Factories.Game
             _staticDataService = staticDataService;
         }
 
-        public void CreatePlayer()
+        public void CreatePlayer(Transform spawnPointTransform)
         {
             PlayerStaticData staticData = _staticDataService.GetPlayerStaticData();
-            var player = _instantiator.InstantiatePrefab(staticData.Prefab, null);
+            GameObject player = _instantiator.InstantiatePrefab(staticData.Prefab, null);
 
+            player.transform.position = spawnPointTransform.position;
+            player.transform.rotation = spawnPointTransform.rotation;
+            
             Player = player;
         }
 

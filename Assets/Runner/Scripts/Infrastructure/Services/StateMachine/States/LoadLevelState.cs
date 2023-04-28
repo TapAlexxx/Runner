@@ -1,6 +1,7 @@
 ﻿using Scripts.Infrastructure.Services.Factories.Game;
 using Scripts.Infrastructure.Services.Factories.UI;
 using Scripts.Infrastructure.Services.SceneLoader;
+using Scripts.Logic.PlayerControl.SpawnControl;
 using UnityEngine;
 using UnityEngine.SceneManagement;
 
@@ -33,8 +34,14 @@ namespace Scripts.Infrastructure.Services.StateMachine.States
             _gameFactory.Clear();
             _uiFactory.CreateUiRoot();
 
-            _gameFactory.CreatePlayer();
+            InitPlayer();
             _gameFactory.CreateHud();
+        }
+
+        private void InitPlayer()
+        {
+            PlayerSpawnPoint spawnPoint = Object.FindObjectOfType<PlayerSpawnPoint>();
+            _gameFactory.CreatePlayer(spawnPoint.transform);
         }
 
         private void OnLevelLoaded()
