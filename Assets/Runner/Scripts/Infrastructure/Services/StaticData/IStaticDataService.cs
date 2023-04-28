@@ -1,4 +1,5 @@
 ﻿using Scripts.Infrastructure.Services.Window;
+using Scripts.StaticData.Player;
 using Scripts.StaticData.Window;
 
 namespace Scripts.Infrastructure.Services.StaticData
@@ -7,5 +8,6 @@ namespace Scripts.Infrastructure.Services.StaticData
     {
         void Load();
         WindowConfig ForWindow(WindowTypeId windowTypeId);
+        PlayerStaticData GetPlayerStaticData();
     }
 }

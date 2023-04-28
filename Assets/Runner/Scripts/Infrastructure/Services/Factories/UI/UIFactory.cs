@@ -1,4 +1,5 @@
-﻿using Scripts.Infrastructure.Services.StaticData;
+﻿using Scripts.Infrastructure.Services.InstantiatorService;
+using Scripts.Infrastructure.Services.StaticData;
 using Scripts.Infrastructure.Services.Window;
 using Scripts.StaticData.Window;
 using UnityEngine;
@@ -22,7 +23,7 @@ namespace Scripts.Infrastructure.Services.Factories.UI
 
         public void CreateUiRoot()
         {
-            _uiRoot = _instantiator.InstantiateOnActiveScene(UiRootPath).transform;
+            _uiRoot = _instantiator.InstantiateFromPath(UiRootPath).transform;
         }
 
         public RectTransform CrateWindow(WindowTypeId windowTypeId)
@@ -33,25 +34,4 @@ namespace Scripts.Infrastructure.Services.Factories.UI
         }
     }
 
-    public interface IInstantiator
-    {
-        Transform InstantiateOnActiveScene(string uiRootPath);
-        GameObject InstantiatePrefab(GameObject configPrefab, Transform uiRoot);
-    }
-
-    public class Instantiator : MonoBehaviour, IInstantiator
-    {
-        public Transform InstantiateOnActiveScene(string uiRootPath)
-        {
-            GameObject prefab = Resources.Load(uiRootPath) as GameObject;
-            GameObject instantiate = Instantiate(prefab);
-            return instantiate.transform;
-        }
-
-        public GameObject InstantiatePrefab(GameObject configPrefab, Transform uiRoot)
-        {
-            GameObject instantiate = Instantiate(configPrefab, uiRoot);
-            return instantiate;
-        }
-    }
 }

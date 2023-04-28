@@ -1,6 +1,6 @@
 ﻿using UnityEngine;
 
-namespace Scripts.Infrastructure
+namespace Scripts.Infrastructure.Bootsrapper
 {
     public class GameRunner : MonoBehaviour
     {

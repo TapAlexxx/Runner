@@ -1,49 +1,46 @@
 ﻿using System;
 using System.Collections.Generic;
+using UnityEngine;
 
 namespace Scripts.Infrastructure.Services.StateMachine
 {
-    public class GameStateMachine
+    public class GameStateMachine : MonoBehaviour
     {
-        private Dictionary<Type, IExitable> states;
-        private IExitable currentState;
+        private Dictionary<Type, IExitable> _states;
+        private IExitable _currentState;
 
         public void Initialize() => 
-            states = new Dictionary<Type, IExitable>();
+            _states = new Dictionary<Type, IExitable>();
 
-        public void AddState<TState>(TState state) where TState : IExitable
+        public void BindState<TState>(TState state) where TState : IExitable
         {
-            states.Add(typeof(TState), state);
+            _states.Add(typeof(TState), state);
         }
 
-        public void Enter<TState, TPayload>(TPayload payload) where TState : PayloadedState<TPayload>, new()
+        public void Enter<TState, TPayload>(TPayload payload) where TState : PayloadedState<TPayload>
         {
-            PayloadedState<TPayload> newState = states[typeof(TState)] as PayloadedState<TPayload>;
+            PayloadedState<TPayload> newState = _states[typeof(TState)] as PayloadedState<TPayload>;
             if (newState == null) 
                 return;
 
-            if (currentState != null)
-            {
-                ((PayloadedState<TPayload>)currentState).Exit();
-            }
+            if (_currentState != null) 
+                _currentState.Exit();
 
             newState.Enter(payload);
-            currentState = newState;
+            _currentState = newState;
         }
         
-        public void Enter<TState>() where TState : State, new()
+        public void Enter<TState>() where TState : State
         {
-            State newState = states[typeof(TState)] as State;
+            State newState = _states[typeof(TState)] as State;
             if (newState == null) 
                 return;
-
-            if (currentState != null)
-            {
-                ((State)currentState).Exit();
-            }
+            
+            if (_currentState != null) 
+                _currentState.Exit();
 
             newState.Enter();
-            currentState = newState;
+            _currentState = newState;
         }
     }
 }
