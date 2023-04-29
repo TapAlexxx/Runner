@@ -13,7 +13,7 @@ namespace Scripts.Logic.PlayerControl.MovementControl
         [SerializeField] private AnimationCurve jumpCurve;
         [SerializeField] private float jumpTime = 0.6f;
         [SerializeField] private float jumpHeight = 3f;
-
+        private float _elapsedTime;
 
         private void Update()
         {
@@ -34,11 +34,11 @@ namespace Scripts.Logic.PlayerControl.MovementControl
 
         private IEnumerator Jump(float height)
         {
-            float elapsedTime = 0;
-            while (elapsedTime <= jumpTime)
+            _elapsedTime = 0;
+            while (_elapsedTime <= jumpTime)
             {
-                transform.DOMoveY(DefaultY + jumpCurve.Evaluate(elapsedTime / jumpTime) * height, Time.deltaTime);
-                elapsedTime += Time.deltaTime;
+                transform.DOMoveY(DefaultY + jumpCurve.Evaluate(_elapsedTime / jumpTime) * height, Time.deltaTime);
+                _elapsedTime += Time.deltaTime;
                 yield return null;
             }
         }

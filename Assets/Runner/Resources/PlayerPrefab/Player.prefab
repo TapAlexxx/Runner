@@ -1735,6 +1735,9 @@ GameObject:
   - component: {fileID: -3001745227388161626}
   - component: {fileID: 6407225117059200880}
   - component: {fileID: 9199064244756812498}
+  - component: {fileID: 2469751776305777802}
+  - component: {fileID: 6177014035452406645}
+  - component: {fileID: -8610927321403332940}
   m_Layer: 0
   m_Name: Player
   m_TagString: Untagged
@@ -1839,6 +1842,7 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   animator: {fileID: 1642545659581414524}
+  jumpInput: {fileID: 2469751776305777802}
 --- !u!54 &6407225117059200880
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1868,6 +1872,80 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.3, y: 2, z: 1}
   m_Center: {x: 0, y: 1.1, z: 0}
+--- !u!114 &2469751776305777802
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5431485097401924796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: b6875c9204ad4e13be688706e71b2b17, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  doubleTapTime: 0.3
+--- !u!114 &6177014035452406645
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5431485097401924796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: c22191dba46846c8ab68c621d101902c, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  jumpCurve:
+    serializedVersion: 2
+    m_Curve:
+    - serializedVersion: 3
+      time: 0
+      value: 0
+      inSlope: 5.259332
+      outSlope: 5.259332
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0
+      outWeight: 0.03935768
+    - serializedVersion: 3
+      time: 0.4
+      value: 1
+      inSlope: 0.005559299
+      outSlope: 0.005559299
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.37752908
+      outWeight: 0.13098234
+    - serializedVersion: 3
+      time: 1
+      value: 0
+      inSlope: -5.100644
+      outSlope: -5.100644
+      tangentMode: 0
+      weightedMode: 0
+      inWeight: 0.029387075
+      outWeight: 0
+    m_PreInfinity: 2
+    m_PostInfinity: 2
+    m_RotationOrder: 4
+  jumpTime: 0.6
+  jumpHeight: 2
+  playerInput: {fileID: 2469751776305777802}
+  groundChecker: {fileID: -8610927321403332940}
+--- !u!114 &-8610927321403332940
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5431485097401924796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ee8c56c9f4ab4388a5a905d780555097, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
 --- !u!1 &5538220336631564049
 GameObject:
   m_ObjectHideFlags: 0
