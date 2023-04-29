@@ -1,4 +1,4 @@
-﻿namespace CarTonki.Scripts.Logic.CameraControl
+﻿namespace Scripts.Logic.CameraControl
 {
     public enum CameraViewState
     {

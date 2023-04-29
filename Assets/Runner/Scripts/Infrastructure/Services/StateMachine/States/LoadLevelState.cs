@@ -1,5 +1,4 @@
-﻿using CarTonki.Scripts.Logic.CameraControl;
-using Scripts.Infrastructure.Services.Factories.Game;
+﻿using Scripts.Infrastructure.Services.Factories.Game;
 using Scripts.Infrastructure.Services.Factories.UI;
 using Scripts.Infrastructure.Services.SceneLoader;
 using Scripts.Logic.CameraControl;

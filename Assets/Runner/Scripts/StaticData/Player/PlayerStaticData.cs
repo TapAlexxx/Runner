@@ -6,5 +6,7 @@ namespace Scripts.StaticData.Player
     public class PlayerStaticData : ScriptableObject
     {
         public GameObject Prefab;
+        public float MoveSpeed;
+        public float JumpHeight;
     }
 }

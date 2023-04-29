@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace CarTonki.Scripts.Logic.CameraControl
+namespace Scripts.Logic.CameraControl
 {
     public class CameraTarget : MonoBehaviour
     {
