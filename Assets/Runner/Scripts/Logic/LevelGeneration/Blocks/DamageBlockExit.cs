@@ -9,11 +9,6 @@ namespace Scripts.Logic.LevelGeneration.Blocks
         
         public DamageBlock DamageBlock => damageBlock;
 
-        private void OnValidate()
-        {
-            damageBlock = GetComponentInChildren<DamageBlock>();
-        }
-        
         public bool AccordingTo(DamageBlock lastDamageBlock) => 
             lastDamageBlock == damageBlock;
     }
