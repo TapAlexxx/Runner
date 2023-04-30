@@ -1,5 +1,6 @@
 ﻿using System.Collections;
 using DG.Tweening;
+using Scripts.Logic.PlayerControl.InputControl;
 using UnityEngine;
 
 namespace Scripts.Logic.PlayerControl.MovementControl

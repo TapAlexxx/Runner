@@ -1,7 +1,7 @@
 ﻿using System;
 using UnityEngine;
 
-namespace Scripts.Logic.PlayerControl.MovementControl
+namespace Scripts.Logic.PlayerControl.InputControl
 {
 
     public class JumpInput : MonoBehaviour
