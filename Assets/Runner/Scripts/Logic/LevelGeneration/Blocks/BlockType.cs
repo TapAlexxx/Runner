@@ -1,4 +1,4 @@
-﻿namespace Scripts.Logic.LevelGeneration
+﻿namespace Scripts.Logic.LevelGeneration.Blocks
 {
 
     public enum BlockType

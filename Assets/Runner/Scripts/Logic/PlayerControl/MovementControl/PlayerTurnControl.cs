@@ -1,5 +1,6 @@
 ﻿using System;
 using Scripts.Logic.LevelGeneration;
+using Scripts.Logic.LevelGeneration.Blocks;
 using UnityEngine;
 
 namespace Scripts.Logic.PlayerControl.MovementControl

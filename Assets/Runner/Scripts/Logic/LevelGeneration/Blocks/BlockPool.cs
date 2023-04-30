@@ -2,7 +2,7 @@
 using System.Linq;
 using UnityEngine;
 
-namespace Scripts.Logic.LevelGeneration
+namespace Scripts.Logic.LevelGeneration.Blocks
 {
 
     public class BlockPool : MonoBehaviour
