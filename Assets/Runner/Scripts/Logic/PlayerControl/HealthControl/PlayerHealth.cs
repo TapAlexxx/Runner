@@ -25,7 +25,7 @@ namespace Scripts.Logic.PlayerControl.HealthControl
         public void Initialize(PlayerStaticData staticData)
         {
             _startHealth = staticData.StartHealth;
-            ResetHealth();
+            Revive();
         }
 
         private void Start()
@@ -44,7 +44,7 @@ namespace Scripts.Logic.PlayerControl.HealthControl
             HealthChanged?.Invoke();
         }
 
-        private void ResetHealth()
+        public void Revive()
         {
             CurrentHealth = _startHealth;
             HealthChanged?.Invoke();

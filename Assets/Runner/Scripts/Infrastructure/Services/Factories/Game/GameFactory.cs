@@ -1,8 +1,8 @@
 ﻿using System;
 using Scripts.Infrastructure.Services.InstantiatorService;
+using Scripts.Infrastructure.Services.StateMachine;
 using Scripts.Infrastructure.Services.StaticData;
 using Scripts.Infrastructure.Services.Window;
-using Scripts.Logic;
 using Scripts.Logic.CameraControl;
 using Scripts.Logic.Hud;
 using Scripts.Logic.LevelGeneration;
@@ -19,8 +19,9 @@ namespace Scripts.Infrastructure.Services.Factories.Game
     {
         private readonly IStaticDataService _staticDataService;
         private readonly IInstantiator _instantiator;
-        private readonly IWindowService _windowService;
-        
+        private GameStateMachine _gameStateMachine;
+        private IWindowService _windowService;
+
         public GameObject Player { get; private set; }
         public GameObject Hud { get; private set; }
         public CameraStateChanger CameraStateChanger { get; private set; }
@@ -28,9 +29,10 @@ namespace Scripts.Infrastructure.Services.Factories.Game
 
 
         public GameFactory(IStaticDataService staticDataService, IInstantiator instantiator,
-            IWindowService windowService)
+            GameStateMachine gameStateMachine, IWindowService windowService)
         {
             _windowService = windowService;
+            _gameStateMachine = gameStateMachine;
             _instantiator = instantiator;
             _staticDataService = staticDataService;
         }

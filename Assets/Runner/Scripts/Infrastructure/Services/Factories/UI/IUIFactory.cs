@@ -6,6 +6,6 @@ namespace Scripts.Infrastructure.Services.Factories.UI
   public interface IUIFactory
   {
     void CreateUiRoot();
-    RectTransform CrateWindow(WindowTypeId windowTypeId);
+    GameObject CrateWindow(WindowTypeId windowTypeId);
   }
 }

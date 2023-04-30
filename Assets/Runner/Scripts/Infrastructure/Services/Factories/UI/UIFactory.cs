@@ -1,6 +1,9 @@
-﻿using Scripts.Infrastructure.Services.InstantiatorService;
+﻿using Scripts.Infrastructure.Services.Factories.Game;
+using Scripts.Infrastructure.Services.InstantiatorService;
+using Scripts.Infrastructure.Services.StateMachine;
 using Scripts.Infrastructure.Services.StaticData;
 using Scripts.Infrastructure.Services.Window;
+using Scripts.Logic.Hud;
 using Scripts.StaticData.Window;
 using UnityEngine;
 
@@ -26,11 +29,11 @@ namespace Scripts.Infrastructure.Services.Factories.UI
             _uiRoot = _instantiator.CreateUiRoot(UiRootPath).transform;
         }
 
-        public RectTransform CrateWindow(WindowTypeId windowTypeId)
+        public GameObject CrateWindow(WindowTypeId windowTypeId)
         {
             WindowConfig config = _staticData.ForWindow(windowTypeId);
             GameObject window = _instantiator.InstantiatePrefab(config.Prefab, _uiRoot);
-            return window.GetComponent<RectTransform>();
+            return window;
         }
     }
 

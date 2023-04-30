@@ -2,7 +2,6 @@
 {
     public enum WindowTypeId
     {
-        Unknown,
         Finish,
         Lose
     }
