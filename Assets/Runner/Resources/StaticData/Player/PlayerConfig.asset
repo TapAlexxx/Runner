@@ -19,4 +19,4 @@ MonoBehaviour:
   DefaultJumpDuration: 0.3
   DoubleJumpDuration: 0.4
   StartHealth: 3
-  DoubleTapTime: 0.21
+  DoubleTapTime: 0.3

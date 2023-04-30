@@ -1,4 +1,5 @@
-﻿using Scripts.StaticData.Player;
+﻿using System.Collections;
+using Scripts.StaticData.Player;
 using UnityEngine;
 
 namespace Scripts.Logic.PlayerControl.MovementControl
@@ -14,8 +15,15 @@ namespace Scripts.Logic.PlayerControl.MovementControl
         private Vector3 _currentDirection;
         private Vector3 _targetDirection;
         private Vector3 _targetRotation;
+        private bool _active;
+        private Coroutine _stopMoveCoroutine;
 
         public float NormalizedSpeed => _currentSpeed / _moveSpeed;
+
+        private void OnValidate()
+        {
+            playerTurnControl = GetComponentInChildren<PlayerTurnControl>();
+        }
 
         public void Initialize(PlayerStaticData staticData)
         {
@@ -24,9 +32,37 @@ namespace Scripts.Logic.PlayerControl.MovementControl
             InitializeDefault();
         }
 
-        private void OnValidate()
+        private void InitializeDefault()
         {
-            playerTurnControl = GetComponentInChildren<PlayerTurnControl>();
+            _targetDirection = Vector3.forward;
+            _currentDirection = _targetDirection;
+            _targetRotation = Vector3.zero;
+        }
+
+        public void Activate()
+        {
+            if (_stopMoveCoroutine != null)
+            {
+                StopCoroutine(_stopMoveCoroutine);
+                _stopMoveCoroutine = null;
+            }
+            
+            _active = true;
+        }
+
+        public void Disable()
+        {
+            _active = false;
+            _stopMoveCoroutine = StartCoroutine(StopMove());
+        }
+
+        private IEnumerator StopMove()
+        {
+            while (_currentSpeed != 0)
+            {
+                _currentSpeed = Mathf.Lerp(_currentSpeed, _moveSpeed, Time.deltaTime);
+                yield return null;
+            }
         }
 
         private void Start()
@@ -41,15 +77,11 @@ namespace Scripts.Logic.PlayerControl.MovementControl
             playerTurnControl.TurnedRight -= TurnRight;
         }
 
-        private void InitializeDefault()
-        {
-            _targetDirection = Vector3.forward;
-            _currentDirection = _targetDirection;
-            _targetRotation = Vector3.zero;
-        }
-
         private void Update()
         {
+            if(!_active)
+                return;
+            
             Move();
             UpdateSpeed();
             UpdateDirection();
@@ -86,6 +118,6 @@ namespace Scripts.Logic.PlayerControl.MovementControl
             transform.position += _currentDirection * (_currentSpeed * Time.deltaTime);
 
         private void UpdateSpeed() =>
-            _currentSpeed = Mathf.Lerp(_currentSpeed, _moveSpeed, Time.fixedDeltaTime);
+            _currentSpeed = Mathf.Lerp(_currentSpeed, _moveSpeed, Time.deltaTime);
     }
 }

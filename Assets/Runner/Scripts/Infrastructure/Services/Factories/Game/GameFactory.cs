@@ -3,6 +3,7 @@ using Scripts.Infrastructure.Services.StaticData;
 using Scripts.Infrastructure.Services.Window;
 using Scripts.Logic;
 using Scripts.Logic.CameraControl;
+using Scripts.Logic.PlayerControl.HealthControl;
 using Scripts.Logic.PlayerControl.InputControl;
 using Scripts.Logic.PlayerControl.MovementControl;
 using Scripts.StaticData.Player;
@@ -40,6 +41,7 @@ namespace Scripts.Infrastructure.Services.Factories.Game
             player.GetComponent<PlayerMover>().Initialize(staticData);
             player.GetComponent<PlayerJumper>().Initialize(staticData);
             player.GetComponent<JumpInput>().Initialize(staticData);
+            player.GetComponent<PlayerHealth>().Initialize(staticData);
             
             Player = player;
         }

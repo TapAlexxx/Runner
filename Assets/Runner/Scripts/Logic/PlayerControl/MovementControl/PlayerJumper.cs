@@ -22,12 +22,26 @@ namespace Scripts.Logic.PlayerControl.MovementControl
         private float _delay;
         private bool _jumped;
         private bool _canJump;
+        private bool _active;
 
         private void OnValidate()
         {
             playerInput = GetComponentInChildren<JumpInput>();
             groundChecker = GetComponentInChildren<GroundChecker>();
         }
+
+        public void Initialize(PlayerStaticData staticData)
+        {
+            _jumpHeight = staticData.JumpHeight;
+            _defaultJumpDuration = staticData.DefaultJumpDuration;
+            _doubleJumpDuration = staticData.DoubleJumpDuration;
+        }
+
+        public void Activate() => 
+            _active = true;
+
+        public void Disable() => 
+            _active = false;
 
         private void Start()
         {
@@ -44,6 +58,8 @@ namespace Scripts.Logic.PlayerControl.MovementControl
 
         private void DefaultJump()
         {
+            if(!_active)
+                return;
             if(!groundChecker.Grounded || !_canJump)
                 return;
             _jumped = true;
@@ -57,6 +73,8 @@ namespace Scripts.Logic.PlayerControl.MovementControl
 
         private void DoubleJump()
         {
+            if(!_active)
+                return;
             if(!_jumped)
                 return;
             _jumped = false;
@@ -83,13 +101,6 @@ namespace Scripts.Logic.PlayerControl.MovementControl
                 yield return new WaitForFixedUpdate();
             }
             _canJump = true;
-        }
-
-        public void Initialize(PlayerStaticData staticData)
-        {
-            _jumpHeight = staticData.JumpHeight;
-            _defaultJumpDuration = staticData.DefaultJumpDuration;
-            _doubleJumpDuration = staticData.DoubleJumpDuration;
         }
     }
 }

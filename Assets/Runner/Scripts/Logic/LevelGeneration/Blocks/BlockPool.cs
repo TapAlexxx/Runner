@@ -1,5 +1,6 @@
 ﻿using System.Collections.Generic;
 using System.Linq;
+using Scripts.Extensions;
 using UnityEngine;
 
 namespace Scripts.Logic.LevelGeneration.Blocks
@@ -49,24 +50,28 @@ namespace Scripts.Logic.LevelGeneration.Blocks
 
         public bool TryGetDefault(out GameObject block)
         {
+            _defaultPool.Shuffle();
             GetBlockFrom(_defaultPool, out block);
             return block != null;
         }
 
         public bool TryGetLeftTurn(out GameObject block)
         {
+            _leftTurnPool.Shuffle();
             GetBlockFrom(_leftTurnPool, out block);
             return block != null;
         }
         
         public bool TryGetRightTurn(out GameObject block)
         {
+            _rightTurnPool.Shuffle();
             GetBlockFrom(_rightTurnPool, out block);
             return block != null;
         }
 
         public bool TryGetDamage(out GameObject block)
         {
+            _damagePool.Shuffle();
             GetBlockFrom(_damagePool, out block);
             return block != null;
         }

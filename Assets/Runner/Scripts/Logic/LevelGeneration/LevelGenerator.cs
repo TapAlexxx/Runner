@@ -48,7 +48,8 @@ namespace Scripts.Logic.LevelGeneration
             
             Vector3 currentPosition = Vector3.zero;
             Vector3 currentRotation = Vector3.zero;
-            
+
+            bool isPrevDefault = false;
             Turn currentTurn = Turn.None;
             int blockToTurn = Random.Range(minBlocksToTurn, maxBlocksToTurn);
             
@@ -62,12 +63,12 @@ namespace Scripts.Logic.LevelGeneration
                         currentTurn = isRightTurn ? Turn.Left : Turn.Right;
                         if (currentTurn == Turn.Left)
                         {
-                            currentTurn = TurnRight(_firstRight, ref currentPosition, ref currentRotation);
+                            currentTurn = PlaceTurnRight(_firstRight, ref currentPosition, ref currentRotation);
                             currentDirection = _right;
                         }
                         else
                         {
-                            currentTurn = TurnLeft(_firstLeft, ref currentPosition, ref currentRotation);
+                            currentTurn = PlaceTurnLeft(_firstLeft, ref currentPosition, ref currentRotation);
                             currentDirection = _left;
                         }
                     }
@@ -75,37 +76,48 @@ namespace Scripts.Logic.LevelGeneration
                     {
                         if (currentTurn == Turn.Left)
                         {
-                            TurnRight(_firstRight, ref currentPosition, ref currentRotation);
+                            PlaceTurnRight(_firstRight, ref currentPosition, ref currentRotation);
                             currentPosition += currentDirection.Vector;
                         }
                         else if (currentTurn == Turn.Right)
                         {
-                            TurnLeft(_firstLeft, ref currentPosition, ref currentRotation);
+                            PlaceTurnLeft(_firstLeft, ref currentPosition, ref currentRotation);
                             currentPosition += currentDirection.Vector;
                         }
 
                         currentTurn = Turn.None;
                         currentDirection = _forward;
                     }
+                    isPrevDefault = false;
                     blockToTurn = Random.Range(minBlocksToTurn, maxBlocksToTurn);
                 }
                 else
                 {
-                    pool.TryGetDefault(out GameObject turnBlock);
-                    PlaceBlock(turnBlock, currentDirection, ref currentPosition, ref currentRotation);
+                    GameObject block;
+                    if (isPrevDefault)
+                    {
+                        pool.TryGetDamage(out block);
+                        isPrevDefault = false;
+                    }
+                    else
+                    {
+                        pool.TryGetDefault(out block);
+                        isPrevDefault = true;
+                    }
+                    PlaceBlock(block, currentDirection, ref currentPosition, ref currentRotation);
                 }
                 blockToTurn--;
             }
         }
 
-        private Turn TurnRight(Direction direction, ref Vector3 currentPosition, ref Vector3 currentRotation)
+        private Turn PlaceTurnRight(Direction direction, ref Vector3 currentPosition, ref Vector3 currentRotation)
         {
             pool.TryGetRightTurn(out GameObject turnBlock);
             PlaceBlock(turnBlock, direction, ref currentPosition, ref currentRotation);
             return Turn.Right;
         }
 
-        private Turn TurnLeft(Direction direction, ref Vector3 currentPosition, ref Vector3 currentRotation)
+        private Turn PlaceTurnLeft(Direction direction, ref Vector3 currentPosition, ref Vector3 currentRotation)
         {
             pool.TryGetLeftTurn(out GameObject turnBlock);
             PlaceBlock(turnBlock, direction, ref currentPosition, ref currentRotation);

@@ -437,7 +437,9 @@ MonoBehaviour:
   damageBlocks:
   - {fileID: 3242696960732796319, guid: abe662300eebea148b8f7c92c4fe156e, type: 3}
   - {fileID: 2004050113734931565, guid: b362b284c77349342b9981ba10c1d7a8, type: 3}
-  damageCopyCount: 1
+  - {fileID: 1990772598339263357, guid: 5aad546e55fffa34ca5a00a1878b6026, type: 3}
+  - {fileID: 4552714175291346496, guid: b4ce5e8169ae7db47a76dcf4bd41a434, type: 3}
+  damageCopyCount: 10
 --- !u!114 &1640954465
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -450,8 +452,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2feb75879d2b4d32ba4f47a694f35d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minBlocksToTurn: 3
-  maxBlocksToTurn: 5
+  minBlocksToTurn: 10
+  maxBlocksToTurn: 15
   pool: {fileID: 1640954464}
   levelLenght: 40
 --- !u!4 &1640954466

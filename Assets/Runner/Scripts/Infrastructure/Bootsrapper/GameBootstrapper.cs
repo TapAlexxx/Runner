@@ -80,7 +80,7 @@ namespace Scripts.Infrastructure.Bootsrapper
                 _gameFactory, _gameStateMachine,
                 _sceneLoader, _uiFactory));
             
-            _gameStateMachine.BindState(new GameLoopState());
+            _gameStateMachine.BindState(new GameLoopState(_gameFactory));
         }
 
         private GameStateMachine SetupGameStateMachine()
