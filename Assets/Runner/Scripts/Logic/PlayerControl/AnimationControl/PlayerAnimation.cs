@@ -10,18 +10,18 @@ namespace Scripts.Logic.PlayerControl.AnimationControl
     {
         [SerializeField] private Animator animator;
         [SerializeField] private GroundChecker groundChecker;
+        [SerializeField] private PlayerMover playerMover;
         
         private void OnValidate()
         {
             animator = GetComponentInChildren<Animator>();
             groundChecker = GetComponentInChildren<GroundChecker>();
+            playerMover = GetComponentInChildren<PlayerMover>();
         }
         
         private void Update()
         {
-            float axis = Input.GetAxis("Vertical");
-         
-            animator.SetFloat("Movement", axis);
+            animator.SetFloat("Movement", playerMover.NormalizedSpeed);
             animator.SetBool("Jump", !groundChecker.Grounded);
         }
     }

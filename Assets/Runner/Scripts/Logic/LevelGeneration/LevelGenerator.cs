@@ -7,9 +7,9 @@ namespace Scripts.Logic.LevelGeneration
 
     public class LevelGenerator : MonoBehaviour
     {
-        private const int MinBlocksToTurn = 10;
-        private const int MaxBlocksToTurn = 15;
-        
+        [SerializeField] private int minBlocksToTurn = 10;
+        [SerializeField] private int maxBlocksToTurn = 15;
+        [Space(10)]
         [SerializeField] private BlockPool pool;
         [SerializeField] private int levelLenght;
         
@@ -49,7 +49,7 @@ namespace Scripts.Logic.LevelGeneration
             Vector3 currentRotation = Vector3.zero;
             
             Turn currentTurn = Turn.None;
-            int blockToTurn = Random.Range(MinBlocksToTurn, MaxBlocksToTurn);
+            int blockToTurn = Random.Range(minBlocksToTurn, maxBlocksToTurn);
             
             for (int i = 0; i < lenght; i++)
             {
@@ -86,7 +86,7 @@ namespace Scripts.Logic.LevelGeneration
                         currentTurn = Turn.None;
                         currentDirection = _forward;
                     }
-                    blockToTurn = Random.Range(MinBlocksToTurn, MaxBlocksToTurn);
+                    blockToTurn = Random.Range(minBlocksToTurn, maxBlocksToTurn);
                 }
                 else
                 {

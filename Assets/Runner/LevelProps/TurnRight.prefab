@@ -12,13 +12,14 @@ GameObject:
   - component: {fileID: 289214376959855364}
   - component: {fileID: 289214376959855419}
   - component: {fileID: 289214376959855418}
-  - component: {fileID: 289214376959855417}
+  - component: {fileID: 967888159599443113}
+  - component: {fileID: 8655642890585753661}
   m_Layer: 0
   m_Name: TurnRight
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
-  m_StaticEditorFlags: 0
+  m_StaticEditorFlags: 4294967295
   m_IsActive: 1
 --- !u!4 &289214376959855365
 Transform:
@@ -2759,17 +2760,29 @@ MeshFilter:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289214376959855416}
   m_Mesh: {fileID: 0}
---- !u!64 &289214376959855417
-MeshCollider:
+--- !u!114 &967888159599443113
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 289214376959855416}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 999affc1a6cc4121a48d7c71686739a7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Turn: 2
+--- !u!65 &8655642890585753661
+BoxCollider:
   m_ObjectHideFlags: 0
   m_CorrespondingSourceObject: {fileID: 0}
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 289214376959855416}
   m_Material: {fileID: 0}
-  m_IsTrigger: 0
+  m_IsTrigger: 1
   m_Enabled: 1
-  serializedVersion: 4
-  m_Convex: 0
-  m_CookingOptions: 30
-  m_Mesh: {fileID: 0}
+  serializedVersion: 2
+  m_Size: {x: 20, y: 17, z: 1}
+  m_Center: {x: 0, y: 8, z: 10}

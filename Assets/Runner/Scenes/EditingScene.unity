@@ -450,6 +450,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2feb75879d2b4d32ba4f47a694f35d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  minBlocksToTurn: 3
+  maxBlocksToTurn: 5
   pool: {fileID: 1640954464}
   levelLenght: 40
 --- !u!4 &1640954466
