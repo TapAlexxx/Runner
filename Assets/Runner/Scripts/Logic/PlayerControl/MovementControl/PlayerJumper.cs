@@ -1,6 +1,7 @@
 ﻿using System.Collections;
 using DG.Tweening;
 using Scripts.Logic.PlayerControl.InputControl;
+using Scripts.StaticData.Player;
 using UnityEngine;
 
 namespace Scripts.Logic.PlayerControl.MovementControl
@@ -9,18 +10,18 @@ namespace Scripts.Logic.PlayerControl.MovementControl
     public class PlayerJumper : MonoBehaviour
     {
         private const float DefaultY = 0.5f;
-        
-        [SerializeField] private float jumpHeight = 2f;
+
         [SerializeField] private JumpInput playerInput;
         [SerializeField] private GroundChecker groundChecker;
-        [SerializeField] private float defaultJumpDuration = 0.3f;
-        [SerializeField] private float doubleJumpDuration = 0.3f;
         
+        private float _jumpHeight;
+        private float _defaultJumpDuration;
+        private float _doubleJumpDuration;
         private float _targetHeight;
-        private bool _jumped;
-        private bool _canJump;
         private float _elapsedTime;
         private float _delay;
+        private bool _jumped;
+        private bool _canJump;
 
         private void OnValidate()
         {
@@ -46,10 +47,10 @@ namespace Scripts.Logic.PlayerControl.MovementControl
             if(!groundChecker.Grounded || !_canJump)
                 return;
             _jumped = true;
-            _targetHeight = jumpHeight;
+            _targetHeight = _jumpHeight;
 
-            Jump(_targetHeight, defaultJumpDuration);
-            _delay = defaultJumpDuration + defaultJumpDuration * 1.5f;
+            Jump(_targetHeight, _defaultJumpDuration);
+            _delay = _defaultJumpDuration + _defaultJumpDuration * 1.5f;
             
             StartCoroutine(DelayNextJump());
         }
@@ -59,10 +60,10 @@ namespace Scripts.Logic.PlayerControl.MovementControl
             if(!_jumped)
                 return;
             _jumped = false;
-            _targetHeight = jumpHeight * 2;
+            _targetHeight = _jumpHeight * 2;
             
-            Jump(_targetHeight, doubleJumpDuration);
-            _delay = doubleJumpDuration + doubleJumpDuration * 1.5f;
+            Jump(_targetHeight, _doubleJumpDuration);
+            _delay = _doubleJumpDuration + _doubleJumpDuration * 1.5f;
         }
 
         private void Jump(float targetHeight, float jumpDuration)
@@ -82,6 +83,13 @@ namespace Scripts.Logic.PlayerControl.MovementControl
                 yield return new WaitForFixedUpdate();
             }
             _canJump = true;
+        }
+
+        public void Initialize(PlayerStaticData staticData)
+        {
+            _jumpHeight = staticData.JumpHeight;
+            _defaultJumpDuration = staticData.DefaultJumpDuration;
+            _doubleJumpDuration = staticData.DoubleJumpDuration;
         }
     }
 }

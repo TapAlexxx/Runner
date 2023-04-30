@@ -1731,10 +1731,10 @@ GameObject:
   m_Component:
   - component: {fileID: 4623879910069921286}
   - component: {fileID: 1642545659581414524}
-  - component: {fileID: -5466273457611979096}
-  - component: {fileID: -3001745227388161626}
   - component: {fileID: 6407225117059200880}
   - component: {fileID: 9199064244756812498}
+  - component: {fileID: -5466273457611979096}
+  - component: {fileID: -3001745227388161626}
   - component: {fileID: 2469751776305777802}
   - component: {fileID: 6177014035452406645}
   - component: {fileID: -8610927321403332940}
@@ -1782,36 +1782,6 @@ Animator:
   m_HasTransformHierarchy: 1
   m_AllowConstantClipSamplingOptimization: 1
   m_KeepAnimatorControllerStateOnDisable: 0
---- !u!114 &-5466273457611979096
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5431485097401924796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: ff359b757a4f4076b0677712a2fe40e7, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  speed: 15
-  rotationSpeed: 5
-  playerTurnControl: {fileID: 3081662638205385915}
---- !u!114 &-3001745227388161626
-MonoBehaviour:
-  m_ObjectHideFlags: 0
-  m_CorrespondingSourceObject: {fileID: 0}
-  m_PrefabInstance: {fileID: 0}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 5431485097401924796}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 76a2b3ceb1564eccb510e70d483da7ef, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
-  animator: {fileID: 1642545659581414524}
-  groundChecker: {fileID: -8610927321403332940}
-  playerMover: {fileID: -5466273457611979096}
 --- !u!54 &6407225117059200880
 Rigidbody:
   m_ObjectHideFlags: 0
@@ -1841,6 +1811,34 @@ BoxCollider:
   serializedVersion: 2
   m_Size: {x: 1.3, y: 2, z: 1}
   m_Center: {x: 0, y: 1.1, z: 0}
+--- !u!114 &-5466273457611979096
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5431485097401924796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: ff359b757a4f4076b0677712a2fe40e7, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  playerTurnControl: {fileID: 3081662638205385915}
+--- !u!114 &-3001745227388161626
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 5431485097401924796}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 76a2b3ceb1564eccb510e70d483da7ef, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  animator: {fileID: 1642545659581414524}
+  groundChecker: {fileID: -8610927321403332940}
+  playerMover: {fileID: -5466273457611979096}
 --- !u!114 &2469751776305777802
 MonoBehaviour:
   m_ObjectHideFlags: 0

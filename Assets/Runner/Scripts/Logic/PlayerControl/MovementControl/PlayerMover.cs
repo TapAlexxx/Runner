@@ -1,20 +1,28 @@
-﻿using UnityEngine;
+﻿using Scripts.StaticData.Player;
+using UnityEngine;
 
 namespace Scripts.Logic.PlayerControl.MovementControl
 {
 
     public class PlayerMover : MonoBehaviour
     {
-        [SerializeField] private float speed;
-        [SerializeField] private float rotationSpeed;
         [SerializeField] private PlayerTurnControl playerTurnControl;
         
+        private float _moveSpeed;
+        private float _rotationSpeed;
         private float _currentSpeed;
         private Vector3 _currentDirection;
         private Vector3 _targetDirection;
         private Vector3 _targetRotation;
 
-        public float NormalizedSpeed => _currentSpeed / speed;
+        public float NormalizedSpeed => _currentSpeed / _moveSpeed;
+
+        public void Initialize(PlayerStaticData staticData)
+        {
+            _moveSpeed = staticData.MoveSpeed;
+            _rotationSpeed = staticData.RotationSpeed;
+            InitializeDefault();
+        }
 
         private void OnValidate()
         {
@@ -25,7 +33,6 @@ namespace Scripts.Logic.PlayerControl.MovementControl
         {
             playerTurnControl.TurnedLeft += TurnLeft;
             playerTurnControl.TurnedRight += TurnRight;
-            InitializeDefault();
         }
 
         private void OnDestroy()
@@ -47,7 +54,7 @@ namespace Scripts.Logic.PlayerControl.MovementControl
             UpdateSpeed();
             UpdateDirection();
             
-            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(_targetRotation), rotationSpeed * Time.deltaTime);
+            transform.rotation = Quaternion.Lerp(transform.rotation, Quaternion.Euler(_targetRotation), _rotationSpeed * Time.deltaTime);
         }
 
         private void TurnLeft()
@@ -73,12 +80,12 @@ namespace Scripts.Logic.PlayerControl.MovementControl
         }
 
         private void UpdateDirection() => 
-            _currentDirection = Vector3.Lerp(_currentDirection, _targetDirection, rotationSpeed * Time.deltaTime);
+            _currentDirection = Vector3.Lerp(_currentDirection, _targetDirection, _rotationSpeed * Time.deltaTime);
 
         private void Move() => 
             transform.position += _currentDirection * (_currentSpeed * Time.deltaTime);
 
         private void UpdateSpeed() =>
-            _currentSpeed = Mathf.Lerp(_currentSpeed, speed, Time.fixedDeltaTime);
+            _currentSpeed = Mathf.Lerp(_currentSpeed, _moveSpeed, Time.fixedDeltaTime);
     }
 }

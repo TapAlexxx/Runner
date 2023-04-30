@@ -3,6 +3,8 @@ using Scripts.Infrastructure.Services.StaticData;
 using Scripts.Infrastructure.Services.Window;
 using Scripts.Logic;
 using Scripts.Logic.CameraControl;
+using Scripts.Logic.PlayerControl.InputControl;
+using Scripts.Logic.PlayerControl.MovementControl;
 using Scripts.StaticData.Player;
 using UnityEngine;
 
@@ -35,6 +37,10 @@ namespace Scripts.Infrastructure.Services.Factories.Game
             player.transform.position = spawnPointTransform.position;
             player.transform.rotation = spawnPointTransform.rotation;
 
+            player.GetComponent<PlayerMover>().Initialize(staticData);
+            player.GetComponent<PlayerJumper>().Initialize(staticData);
+            player.GetComponent<JumpInput>().Initialize(staticData);
+            
             Player = player;
         }
 

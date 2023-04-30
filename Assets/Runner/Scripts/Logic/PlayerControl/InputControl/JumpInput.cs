@@ -1,4 +1,5 @@
 ﻿using System;
+using Scripts.StaticData.Player;
 using UnityEngine;
 
 namespace Scripts.Logic.PlayerControl.InputControl
@@ -7,8 +8,7 @@ namespace Scripts.Logic.PlayerControl.InputControl
     public class JumpInput : MonoBehaviour
     {
         private float _lastJumpButtonTime;
-
-        public float doubleTapTime = 0.2f;
+        private float _doubleTapTime;
 
         public event Action OnSingleJump;
         public event Action OnDoubleJump;
@@ -18,7 +18,7 @@ namespace Scripts.Logic.PlayerControl.InputControl
         {
             if (Input.GetMouseButtonDown(0))
             {
-                if (Time.time - _lastJumpButtonTime < doubleTapTime)
+                if (Time.time - _lastJumpButtonTime < _doubleTapTime)
                 {
                     OnDoubleJump?.Invoke();
                     _lastJumpButtonTime = 0;
@@ -29,6 +29,11 @@ namespace Scripts.Logic.PlayerControl.InputControl
                     _lastJumpButtonTime = Time.time;
                 }
             }
+        }
+
+        public void Initialize(PlayerStaticData staticData)
+        {
+            _doubleTapTime = staticData.DoubleTapTime;
         }
     }
 

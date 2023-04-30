@@ -29,6 +29,8 @@ namespace Scripts.Infrastructure.Bootsrapper
 
         public void Initialize()
         {
+            Application.targetFrameRate = 60;
+            
             _instantiator = SetupInstantiator();
             _sceneLoader = SetupSceneLoader();
             _staticDataService = SetupStaticDataService();
@@ -39,7 +41,7 @@ namespace Scripts.Infrastructure.Bootsrapper
 
 
             _gameStateMachine = SetupGameStateMachine();
-            
+
             BindStates();
 
             LoadInitialStartScene();

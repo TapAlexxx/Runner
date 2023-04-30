@@ -2772,7 +2772,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 999affc1a6cc4121a48d7c71686739a7, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  Turn: 1
+  <Turn>k__BackingField: 1
 --- !u!65 &2054529863372593414
 BoxCollider:
   m_ObjectHideFlags: 0
@@ -2785,4 +2785,4 @@ BoxCollider:
   m_Enabled: 1
   serializedVersion: 2
   m_Size: {x: 20, y: 17, z: 1}
-  m_Center: {x: 0, y: 8, z: 10}
+  m_Center: {x: 0, y: 8, z: 8}
