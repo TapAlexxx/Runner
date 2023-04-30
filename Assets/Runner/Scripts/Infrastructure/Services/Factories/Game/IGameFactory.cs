@@ -1,4 +1,5 @@
 ﻿using Scripts.Logic.CameraControl;
+using Scripts.Logic.LevelGeneration;
 using UnityEngine;
 
 namespace Scripts.Infrastructure.Services.Factories.Game
@@ -8,9 +9,11 @@ namespace Scripts.Infrastructure.Services.Factories.Game
         GameObject Player { get; }
         GameObject Hud { get; }
         CameraStateChanger CameraStateChanger { get; }
+        LevelGenerator LevelGenerator { get; }
         void CreatePlayer(Transform spawnPointTransform);
         void Clear();
         GameObject CreateHud();
         CameraStateChanger CreateCamera();
+        LevelGenerator CreateLevelGenerator();
     }
 }

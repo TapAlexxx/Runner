@@ -11,10 +11,11 @@ namespace Scripts.Logic.PlayerControl.HealthControl
         [SerializeField] private DamageBlockObserver damageBlockObserver;
         
         private int _startHealth;
-        private int _currentHealth;
+        public int CurrentHealth { get; private set; }
 
         public event Action Dead;
         public event Action Revived;
+        public event Action HealthChanged;
 
         private void OnValidate()
         {
@@ -39,24 +40,27 @@ namespace Scripts.Logic.PlayerControl.HealthControl
 
         private void Heal()
         {
-            _currentHealth++;
+            CurrentHealth++;
+            HealthChanged?.Invoke();
         }
 
         private void ResetHealth()
         {
-            _currentHealth = _startHealth;
+            CurrentHealth = _startHealth;
+            HealthChanged?.Invoke();
             Revived?.Invoke();
         }
 
         private void TakeDamage()
         {
-            _currentHealth--;
+            CurrentHealth--;
+            HealthChanged?.Invoke();
             ValidateHealth();
         }
 
         private void ValidateHealth()
         {
-            if (_currentHealth <= 0)
+            if (CurrentHealth <= 0)
             {
                 Dead?.Invoke();
             }

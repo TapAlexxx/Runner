@@ -1,8 +1,12 @@
-﻿using Scripts.Infrastructure.Services.InstantiatorService;
+﻿using System;
+using Scripts.Infrastructure.Services.InstantiatorService;
 using Scripts.Infrastructure.Services.StaticData;
 using Scripts.Infrastructure.Services.Window;
 using Scripts.Logic;
 using Scripts.Logic.CameraControl;
+using Scripts.Logic.Hud;
+using Scripts.Logic.LevelGeneration;
+using Scripts.Logic.PlayerControl;
 using Scripts.Logic.PlayerControl.HealthControl;
 using Scripts.Logic.PlayerControl.InputControl;
 using Scripts.Logic.PlayerControl.MovementControl;
@@ -20,6 +24,7 @@ namespace Scripts.Infrastructure.Services.Factories.Game
         public GameObject Player { get; private set; }
         public GameObject Hud { get; private set; }
         public CameraStateChanger CameraStateChanger { get; private set; }
+        public LevelGenerator LevelGenerator { get; private set; }
 
 
         public GameFactory(IStaticDataService staticDataService, IInstantiator instantiator,
@@ -42,6 +47,7 @@ namespace Scripts.Infrastructure.Services.Factories.Game
             player.GetComponent<PlayerJumper>().Initialize(staticData);
             player.GetComponent<JumpInput>().Initialize(staticData);
             player.GetComponent<PlayerHealth>().Initialize(staticData);
+            player.GetComponent<WinLoseControl>().Initialize(_windowService);
             
             Player = player;
         }
@@ -53,9 +59,25 @@ namespace Scripts.Infrastructure.Services.Factories.Game
             return CameraStateChanger;
         }
 
+        public LevelGenerator CreateLevelGenerator()
+        {
+            GameObject levelGenerator = _instantiator.InstantiateFromPath("LevelProps/LevelGenerator");
+            LevelGenerator = levelGenerator.GetComponentInChildren<LevelGenerator>();
+            if (Player == null)
+                throw new NullReferenceException("create player first");
+            
+            LevelGenerator.Initialize();
+            return LevelGenerator;
+        }
+
         public GameObject CreateHud()
         {
             Hud = _instantiator.InstantiateFromPath("Hud/Hud");
+            if (Player == null)
+                throw new NullReferenceException("create player first");
+            
+            Hud.GetComponentInChildren<TapToPlayButton>().Initialize(Player);
+            Hud.GetComponentInChildren<PlayerHealthView>().Initialize(Player);
             return Hud;
         }
 
@@ -63,6 +85,8 @@ namespace Scripts.Infrastructure.Services.Factories.Game
         {
             Player = null;
             Hud = null;
+            CameraStateChanger = null;
+            LevelGenerator = null;
         }
     }
 }

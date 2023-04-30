@@ -3,5 +3,6 @@
   public interface IWindowService
   {
     void Open(WindowTypeId windowTypeId);
+    void TryCloseLastOpened();
   }
 }

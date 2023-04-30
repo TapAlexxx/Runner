@@ -1,4 +1,6 @@
 ﻿using System;
+using Scripts.Infrastructure.Services.Factories.Game;
+using Scripts.Infrastructure.Services.Window;
 using Scripts.Logic.LevelGeneration.Blocks;
 using UnityEngine;
 using Random = UnityEngine.Random;
@@ -19,15 +21,15 @@ namespace Scripts.Logic.LevelGeneration
         private Direction _right;
         private Direction _firstLeft;
         private Direction _firstRight;
-        
-        private void Awake()
+
+
+        public void Initialize()
         {
             pool.Initialize();
             InitializeDirections();
-            GenerateNewLevel();
         }
 
-        private void GenerateNewLevel()
+        public void GenerateNewLevel()
         {
             pool.Reset();
             GenerateLevel(levelLenght);
@@ -55,6 +57,12 @@ namespace Scripts.Logic.LevelGeneration
             
             for (int i = 0; i < lenght; i++)
             {
+                if (i == lenght - 1)
+                {
+                    pool.TryGetFinish(out GameObject block);
+                    PlaceBlock(block, currentDirection, ref currentPosition, ref currentRotation);
+                    break;
+                }
                 if (blockToTurn <= 0)
                 {
                     if (currentTurn == Turn.None)

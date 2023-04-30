@@ -25,6 +25,12 @@ namespace Scripts.Logic.PlayerControl.StateControl
             playerMover.Activate(); 
         }
 
+        public void EnterWaitState()
+        {
+            playerJumper.Disable();
+            playerMover.Disable();
+        }
+
         private void Start()
         {
             playerHealth.Dead += EnterDeadState;

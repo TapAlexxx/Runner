@@ -2,6 +2,7 @@
 using Scripts.Infrastructure.Services.Factories.UI;
 using Scripts.Infrastructure.Services.SceneLoader;
 using Scripts.Logic.CameraControl;
+using Scripts.Logic.LevelGeneration;
 using Scripts.Logic.PlayerControl.SpawnControl;
 using UnityEngine;
 using UnityEngine.SceneManagement;
@@ -37,6 +38,18 @@ namespace Scripts.Infrastructure.Services.StateMachine.States
 
             InitPlayer();
             InitCamera();
+            InitHud();
+            InitLevelGenerator();
+        }
+
+        private void InitLevelGenerator()
+        {
+            LevelGenerator levelGenerator = _gameFactory.CreateLevelGenerator();
+            levelGenerator.GenerateNewLevel();
+        }
+
+        private void InitHud()
+        {
             _gameFactory.CreateHud();
         }
 

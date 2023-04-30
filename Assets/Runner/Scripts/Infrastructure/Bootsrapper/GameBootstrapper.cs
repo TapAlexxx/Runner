@@ -1,4 +1,5 @@
-﻿using Scripts.Infrastructure.Services.Factories.Game;
+﻿using DG.Tweening;
+using Scripts.Infrastructure.Services.Factories.Game;
 using Scripts.Infrastructure.Services.Factories.UI;
 using Scripts.Infrastructure.Services.InstantiatorService;
 using Scripts.Infrastructure.Services.SceneLoader;
@@ -29,8 +30,6 @@ namespace Scripts.Infrastructure.Bootsrapper
 
         public void Initialize()
         {
-            Application.targetFrameRate = 60;
-            
             _instantiator = SetupInstantiator();
             _sceneLoader = SetupSceneLoader();
             _staticDataService = SetupStaticDataService();
@@ -44,6 +43,9 @@ namespace Scripts.Infrastructure.Bootsrapper
 
             BindStates();
 
+            Application.targetFrameRate = 60;
+            DOTween.Init();
+            
             LoadInitialStartScene();
         }
 
@@ -80,7 +82,7 @@ namespace Scripts.Infrastructure.Bootsrapper
                 _gameFactory, _gameStateMachine,
                 _sceneLoader, _uiFactory));
             
-            _gameStateMachine.BindState(new GameLoopState(_gameFactory));
+            _gameStateMachine.BindState(new GameLoopState());
         }
 
         private GameStateMachine SetupGameStateMachine()
