@@ -6,5 +6,6 @@ namespace Scripts.StaticData
     public class GameConfig : ScriptableObject
     {
         public string StartScene;
+        public bool CanRunCurrent;
     }
 }

@@ -8,6 +8,7 @@ using Scripts.Infrastructure.Services.StaticData;
 using Scripts.Infrastructure.Services.Window;
 using Scripts.StaticData;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 
 namespace Scripts.Infrastructure.Bootsrapper
 {
@@ -47,7 +48,12 @@ namespace Scripts.Infrastructure.Bootsrapper
         private void LoadInitialStartScene()
         {
             GameConfig gameConfig = _staticDataService.GetGameConfig();
-            _gameStateMachine.Enter<LoadLevelState, string>(gameConfig.StartScene);
+
+            string sceneName = gameConfig.CanRunCurrent
+                ? SceneManager.GetActiveScene().name
+                : gameConfig.StartScene;
+            
+            _gameStateMachine.Enter<LoadLevelState, string>(sceneName);
         }
 
         private StaticDataService SetupStaticDataService()
