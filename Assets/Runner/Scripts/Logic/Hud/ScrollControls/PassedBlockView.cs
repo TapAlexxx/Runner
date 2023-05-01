@@ -1,6 +1,4 @@
-﻿using System;
-using Scripts.Infrastructure.Services.InstantiatorService;
-using Scripts.Logic.LevelGeneration.Blocks;
+﻿using Scripts.Logic.LevelGeneration.Blocks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -13,10 +11,9 @@ namespace Scripts.Logic.Hud.ScrollControls
         [SerializeField] private Text countText;
         [SerializeField] private Image icon;
         
-        public void RefreshView(DamageBlockType passedBlockType, int count, PassedBlockData data)
+        public void RefreshView(int count, PassedBlockData data)
         {
-
-            blockName.text = passedBlockType.ToString();
+            blockName.text = data.Name;
             countText.text = count.ToString();
             icon.sprite = data.Icon;
         }

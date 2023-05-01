@@ -33,7 +33,7 @@ namespace Scripts.Logic.Hud.ScrollControls
             {
                 PassedBlockView view = Instantiate(viewPrefab.gameObject, content).GetComponent<PassedBlockView>();
                 PassedBlockData data = _staticDataService.GetBlockDataFor(keyValuePair.Key);
-                view.RefreshView(keyValuePair.Key, keyValuePair.Value, data);
+                view.RefreshView(keyValuePair.Value, data);
             }
         }
 

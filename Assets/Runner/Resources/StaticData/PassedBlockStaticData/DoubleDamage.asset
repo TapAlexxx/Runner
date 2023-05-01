@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c000363f9444329033bca5bfd5529a, type: 3}
   m_Name: DoubleDamage
   m_EditorClassIdentifier: 
+  Name: SHELVES
   DamageBlockType: 3
-  Icon: {fileID: 21300000, guid: 7918dec6072b1b9438dc16016b68c556, type: 3}
+  Icon: {fileID: 21300000, guid: c71aa5b9b8486754a9e403132f057596, type: 3}

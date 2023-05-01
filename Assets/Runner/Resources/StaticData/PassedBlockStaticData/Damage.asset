@@ -12,5 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 90c000363f9444329033bca5bfd5529a, type: 3}
   m_Name: Damage
   m_EditorClassIdentifier: 
+  Name: CUP BOARD
   DamageBlockType: 2
-  Icon: {fileID: 21300000, guid: 7918dec6072b1b9438dc16016b68c556, type: 3}
+  Icon: {fileID: 21300000, guid: 82aae6b2a2151d347a84dbf4a2ca73e5, type: 3}
