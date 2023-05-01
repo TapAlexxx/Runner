@@ -12,6 +12,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: c167b5d4c98242af911bb182ee391847, type: 3}
   m_Name: LevelStaticData
   m_EditorClassIdentifier: 
-  LevelLenght: 10
-  MinBlockToTurn: 10
-  MaxBlockToTurn: 15
+  LevelLenght: 40
+  MinBlockToTurn: 30
+  MaxBlockToTurn: 50

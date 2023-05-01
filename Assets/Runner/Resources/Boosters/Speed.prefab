@@ -485,7 +485,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   <BoosterType>k__BackingField: 0
   <BoostValue>k__BackingField: 10
-  <ChanceToAppear>k__BackingField: 0.3
+  <ChanceToAppear>k__BackingField: 0.2
 --- !u!1 &6614122171003951913
 GameObject:
   m_ObjectHideFlags: 0
