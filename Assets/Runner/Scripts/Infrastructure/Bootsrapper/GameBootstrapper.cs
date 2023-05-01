@@ -1,4 +1,5 @@
 ﻿using DG.Tweening;
+using Scripts.Infrastructure.Services.Curtain;
 using Scripts.Infrastructure.Services.Factories.Game;
 using Scripts.Infrastructure.Services.Factories.UI;
 using Scripts.Infrastructure.Services.InstantiatorService;
@@ -15,6 +16,8 @@ namespace Scripts.Infrastructure.Bootsrapper
 {
     public class GameBootstrapper : MonoBehaviour
     {
+        [SerializeField] private LoadingCurtain curtain;
+        
         private IStaticDataService _staticDataService;
         private IGameFactory _gameFactory;
         private IInstantiator _instantiator;
@@ -22,6 +25,7 @@ namespace Scripts.Infrastructure.Bootsrapper
         private IUIFactory _uiFactory;
         private ISceneLoader _sceneLoader;
         private IWindowService _windowService;
+        private ILoadingCurtain _loadingCurtain;
 
         private void Awake()
         {
@@ -39,8 +43,10 @@ namespace Scripts.Infrastructure.Bootsrapper
             _windowService = SetupWindowService();
             _gameFactory = SetupGameFactory(_staticDataService, _instantiator, _gameStateMachine, _windowService);
             _uiFactory = SetupUiFactory(_staticDataService, _instantiator);
-            _windowService.Initialize(_uiFactory, _gameFactory, _gameStateMachine);
-
+            _windowService.Initialize(_uiFactory, _gameFactory, _gameStateMachine, _staticDataService);
+            
+            _loadingCurtain = _instantiator.InstantiatePrefab(curtain.gameObject, transform).GetComponent<LoadingCurtain>();
+            
             BindStates();
 
             Application.targetFrameRate = 60;
@@ -80,9 +86,9 @@ namespace Scripts.Infrastructure.Bootsrapper
         {
             _gameStateMachine.BindState(new LoadLevelState(
                 _gameFactory, _gameStateMachine,
-                _sceneLoader, _uiFactory));
+                _sceneLoader, _uiFactory, _loadingCurtain));
             
-            _gameStateMachine.BindState(new GameLoopState());
+            _gameStateMachine.BindState(new GameLoopState(_loadingCurtain));
         }
 
         private GameStateMachine SetupGameStateMachine()

@@ -13,7 +13,7 @@ MonoBehaviour:
   m_Name: WindowsStaticData
   m_EditorClassIdentifier: 
   Configs:
+  - WindowTypeId: 0
+    Prefab: {fileID: 3900587644660714716, guid: f336f5047bec32e4fa212b5c737082f6, type: 3}
   - WindowTypeId: 1
-    Prefab: {fileID: 7047230675904962436, guid: f336f5047bec32e4fa212b5c737082f6, type: 3}
-  - WindowTypeId: 2
     Prefab: {fileID: 7047230675904962436, guid: 3d231321045d368439c9d88b35058d9b, type: 3}

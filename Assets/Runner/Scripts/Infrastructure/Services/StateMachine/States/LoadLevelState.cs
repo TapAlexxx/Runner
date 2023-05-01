@@ -1,4 +1,5 @@
-﻿using Scripts.Infrastructure.Services.Factories.Game;
+﻿using Scripts.Infrastructure.Services.Curtain;
+using Scripts.Infrastructure.Services.Factories.Game;
 using Scripts.Infrastructure.Services.Factories.UI;
 using Scripts.Infrastructure.Services.SceneLoader;
 using Scripts.Logic.CameraControl;
@@ -15,10 +16,12 @@ namespace Scripts.Infrastructure.Services.StateMachine.States
         private readonly IGameFactory _gameFactory;
         private readonly ISceneLoader _sceneLoader;
         private readonly IUIFactory _uiFactory;
+        private ILoadingCurtain _loadingCurtain;
 
         public LoadLevelState(IGameFactory gameFactory, GameStateMachine gameStateMachine,
-            ISceneLoader sceneLoader, IUIFactory uiFactory)
+            ISceneLoader sceneLoader, IUIFactory uiFactory, ILoadingCurtain loadingCurtain)
         {
+            _loadingCurtain = loadingCurtain;
             _uiFactory = uiFactory;
             _sceneLoader = sceneLoader;
             _gameFactory = gameFactory;
@@ -28,6 +31,7 @@ namespace Scripts.Infrastructure.Services.StateMachine.States
         public override void Enter(string sceneName)
         {
             Debug.Log("LoadLevelState");
+            _loadingCurtain.Show();
             _sceneLoader.Load(sceneName, OnLevelLoaded);
         }
 
