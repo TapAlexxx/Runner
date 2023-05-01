@@ -13,5 +13,5 @@ MonoBehaviour:
   m_Name: LevelStaticData
   m_EditorClassIdentifier: 
   LevelLenght: 40
-  MinBlockToTurn: 30
-  MaxBlockToTurn: 50
+  MinBlockToTurn: 10
+  MaxBlockToTurn: 15

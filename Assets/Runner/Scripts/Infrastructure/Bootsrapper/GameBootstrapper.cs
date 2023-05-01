@@ -49,7 +49,7 @@ namespace Scripts.Infrastructure.Bootsrapper
             
             BindStates();
 
-            Application.targetFrameRate = 60;
+            Application.targetFrameRate = 300;
             DOTween.Init();
             
             LoadInitialStartScene();
