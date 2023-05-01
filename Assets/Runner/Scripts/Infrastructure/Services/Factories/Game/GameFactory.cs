@@ -10,6 +10,7 @@ using Scripts.Logic.PlayerControl;
 using Scripts.Logic.PlayerControl.HealthControl;
 using Scripts.Logic.PlayerControl.InputControl;
 using Scripts.Logic.PlayerControl.MovementControl;
+using Scripts.StaticData.Level;
 using Scripts.StaticData.Player;
 using UnityEngine;
 
@@ -67,8 +68,8 @@ namespace Scripts.Infrastructure.Services.Factories.Game
             LevelGenerator = levelGenerator.GetComponentInChildren<LevelGenerator>();
             if (Player == null)
                 throw new NullReferenceException("create player first");
-            
-            LevelGenerator.Initialize();
+            LevelStaticData data = _staticDataService.GetLevelStaticData();
+            LevelGenerator.Initialize(data);
             return LevelGenerator;
         }
 

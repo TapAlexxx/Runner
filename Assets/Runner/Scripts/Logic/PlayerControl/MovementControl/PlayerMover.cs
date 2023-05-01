@@ -12,11 +12,14 @@ namespace Scripts.Logic.PlayerControl.MovementControl
         private float _moveSpeed;
         private float _rotationSpeed;
         private float _currentSpeed;
+        private float _defaultSpeed;
         private Vector3 _currentDirection;
         private Vector3 _targetDirection;
         private Vector3 _targetRotation;
         private bool _active;
         private Coroutine _stopMoveCoroutine;
+        private float _speedBoostTime;
+        private Coroutine _speedBoostCoroutine;
 
         public float NormalizedSpeed => _currentSpeed / _moveSpeed;
 
@@ -28,7 +31,9 @@ namespace Scripts.Logic.PlayerControl.MovementControl
         public void Initialize(PlayerStaticData staticData)
         {
             _moveSpeed = staticData.MoveSpeed;
+            _defaultSpeed = staticData.MoveSpeed;
             _rotationSpeed = staticData.RotationSpeed;
+            _speedBoostTime = staticData.SpeedBoostTime;
             InitializeDefault();
         }
 
@@ -53,7 +58,37 @@ namespace Scripts.Logic.PlayerControl.MovementControl
         public void Disable()
         {
             _active = false;
+            DisableBoost();
             _stopMoveCoroutine = StartCoroutine(StopMove());
+        }
+
+        public void BoostSpeed(int boostValue)
+        {
+            DisableBoost();
+            _speedBoostCoroutine = StartCoroutine(IncreaseSpeedFor(boostValue, _speedBoostTime));
+        }
+
+        private void DisableBoost()
+        {
+            if (_speedBoostCoroutine != null)
+            {
+                StopCoroutine(_speedBoostCoroutine);
+                _speedBoostCoroutine = null;
+            }
+            _moveSpeed = _defaultSpeed;
+        }
+
+        private IEnumerator IncreaseSpeedFor(int boostValue, float speedBoostTime)
+        {
+            float elapsedTime = 0;
+            _moveSpeed = _defaultSpeed + boostValue;
+            while (elapsedTime < speedBoostTime)
+            {
+                elapsedTime += Time.deltaTime;
+                yield return null;
+            }
+            
+            _moveSpeed = _defaultSpeed;
         }
 
         private IEnumerator StopMove()
@@ -113,7 +148,7 @@ namespace Scripts.Logic.PlayerControl.MovementControl
         }
 
         private void UpdateDirection() => 
-            _currentDirection = Vector3.Lerp(_currentDirection, _targetDirection, _rotationSpeed * Time.deltaTime);
+            _currentDirection = _targetDirection;
 
         private void Move() => 
             transform.position += _currentDirection * (_currentSpeed * Time.deltaTime);

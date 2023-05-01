@@ -40,12 +40,6 @@ namespace Scripts.Logic.PlayerControl.BlockControl
             {
                 _passedBlocks.Add(block.Type, 1);
             }
-
-            foreach (KeyValuePair<DamageBlockType,int> keyValuePair in _passedBlocks)
-            {
-                Debug.Log(keyValuePair.Key);
-                Debug.Log(keyValuePair.Value);
-            }
         }
     }
 }

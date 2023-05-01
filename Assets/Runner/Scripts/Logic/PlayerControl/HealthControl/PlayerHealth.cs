@@ -38,9 +38,11 @@ namespace Scripts.Logic.PlayerControl.HealthControl
             damageBlockObserver.HitDamageBlock -= TakeDamage;
         }
 
-        private void Heal()
+        public void Heal(int healCount)
         {
-            CurrentHealth++;
+            if (healCount <= 0)
+                throw new InvalidOperationException("heal must be grater zero");
+            CurrentHealth += healCount;
             HealthChanged?.Invoke();
         }
 

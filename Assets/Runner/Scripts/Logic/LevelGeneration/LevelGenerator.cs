@@ -1,7 +1,10 @@
 ﻿using System;
+using System.Collections.Generic;
 using Scripts.Infrastructure.Services.Factories.Game;
 using Scripts.Infrastructure.Services.Window;
+using Scripts.Logic.Boosters;
 using Scripts.Logic.LevelGeneration.Blocks;
+using Scripts.StaticData.Level;
 using UnityEngine;
 using Random = UnityEngine.Random;
 
@@ -10,11 +13,11 @@ namespace Scripts.Logic.LevelGeneration
 
     public class LevelGenerator : MonoBehaviour
     {
-        [SerializeField] private int minBlocksToTurn = 10;
-        [SerializeField] private int maxBlocksToTurn = 15;
-        [Space(10)]
         [SerializeField] private BlockPool pool;
-        [SerializeField] private int levelLenght;
+        
+        private int _minBlocksToTurn;
+        private int _maxBlocksToTurn;
+        private int _levelLenght;
         
         private Direction _forward;
         private Direction _left;
@@ -23,8 +26,12 @@ namespace Scripts.Logic.LevelGeneration
         private Direction _firstRight;
 
 
-        public void Initialize()
+        public void Initialize(LevelStaticData levelStaticData)
         {
+            _minBlocksToTurn = levelStaticData.MinBlockToTurn;
+            _maxBlocksToTurn = levelStaticData.MaxBlockToTurn;
+            _levelLenght = levelStaticData.LevelLenght;
+
             pool.Initialize();
             InitializeDirections();
         }
@@ -32,7 +39,7 @@ namespace Scripts.Logic.LevelGeneration
         public void GenerateNewLevel()
         {
             pool.Reset();
-            GenerateLevel(levelLenght);
+            GenerateLevel(_levelLenght);
         }
 
         private void InitializeDirections()
@@ -53,7 +60,7 @@ namespace Scripts.Logic.LevelGeneration
 
             bool isPrevDefault = false;
             Turn currentTurn = Turn.None;
-            int blockToTurn = Random.Range(minBlocksToTurn, maxBlocksToTurn);
+            int blockToTurn = Random.Range(_minBlocksToTurn, _maxBlocksToTurn);
             
             for (int i = 0; i < lenght; i++)
             {
@@ -97,11 +104,12 @@ namespace Scripts.Logic.LevelGeneration
                         currentDirection = _forward;
                     }
                     isPrevDefault = false;
-                    blockToTurn = Random.Range(minBlocksToTurn, maxBlocksToTurn);
+                    blockToTurn = Random.Range(_minBlocksToTurn, _maxBlocksToTurn);
                 }
                 else
                 {
                     GameObject block;
+                    Booster booster;
                     if (isPrevDefault)
                     {
                         pool.TryGetDamage(out block);
@@ -110,6 +118,14 @@ namespace Scripts.Logic.LevelGeneration
                     else
                     {
                         pool.TryGetDefault(out block);
+                        if (pool.TryGetBooster(out booster))
+                        {
+                            booster.transform.parent = block.transform;
+                            booster.transform.position =
+                                block.GetComponentInChildren<DefaultBlock>().BoosterSpawnPoint.position;
+                            booster.gameObject.SetActive(transform);
+                        }
+
                         isPrevDefault = true;
                     }
                     PlaceBlock(block, currentDirection, ref currentPosition, ref currentRotation);

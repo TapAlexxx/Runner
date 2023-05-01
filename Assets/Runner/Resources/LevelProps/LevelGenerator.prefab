@@ -44,10 +44,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 2feb75879d2b4d32ba4f47a694f35d37, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  minBlocksToTurn: 5
-  maxBlocksToTurn: 10
   pool: {fileID: 4186191377696338901}
-  levelLenght: 10
 --- !u!114 &4186191377696338901
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -78,3 +75,6 @@ MonoBehaviour:
   finishBlocks:
   - {fileID: 5991811455530094729, guid: 0fc74c9ba61092f4f850d02205a91bb0, type: 3}
   finishCopyCount: 5
+  speedBooster: {fileID: 9119879879090141556, guid: 93ebd95c890a8424093be47173a2a858, type: 3}
+  shieldBooster: {fileID: 2000058261153468008, guid: 481214c618df7834e9b50138cc2f103c, type: 3}
+  healBooster: {fileID: 945102416736684681, guid: ff3ae67d7702742439431308714e53fc, type: 3}

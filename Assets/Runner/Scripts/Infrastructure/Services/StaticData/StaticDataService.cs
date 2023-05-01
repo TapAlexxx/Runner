@@ -4,6 +4,7 @@ using Scripts.Infrastructure.Services.Window;
 using Scripts.Logic.Hud.ScrollControls;
 using Scripts.Logic.LevelGeneration.Blocks;
 using Scripts.StaticData;
+using Scripts.StaticData.Level;
 using Scripts.StaticData.Player;
 using Scripts.StaticData.Window;
 using UnityEngine;
@@ -21,6 +22,7 @@ namespace Scripts.Infrastructure.Services.StaticData
         private PlayerStaticData _playerStaticData;
         private GameConfig _gameConfig;
         private List<PassedBlockData> _passedBlockData;
+        private LevelStaticData _levelStaticData;
 
         public void Load()
         {
@@ -36,6 +38,9 @@ namespace Scripts.Infrastructure.Services.StaticData
             _passedBlockData = Resources
                 .LoadAll<PassedBlockData>(PassedBlocksDataPath)
                 .ToList();
+
+            _levelStaticData = Resources
+                .Load<LevelStaticData>("StaticData/Level/LevelStaticData");
         }
 
         public WindowConfig ForWindow(WindowTypeId windowTypeId) => 
@@ -49,5 +54,8 @@ namespace Scripts.Infrastructure.Services.StaticData
 
         public PassedBlockData GetBlockDataFor(DamageBlockType damageBlockType) => 
             _passedBlockData.FirstOrDefault(x => x.DamageBlockType == damageBlockType);
+
+        public LevelStaticData GetLevelStaticData() => 
+            _levelStaticData;
     }
 }
