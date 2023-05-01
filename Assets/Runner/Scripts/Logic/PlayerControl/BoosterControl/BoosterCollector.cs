@@ -1,7 +1,8 @@
 ﻿using System;
+using Scripts.Logic.Boosters;
 using UnityEngine;
 
-namespace Scripts.Logic.Boosters
+namespace Scripts.Logic.PlayerControl.BoosterControl
 {
 
     public class BoosterCollector : MonoBehaviour

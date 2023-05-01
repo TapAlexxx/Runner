@@ -3,7 +3,7 @@ using Scripts.Logic.PlayerControl.HealthControl;
 using Scripts.Logic.PlayerControl.MovementControl;
 using UnityEngine;
 
-namespace Scripts.Logic.Boosters
+namespace Scripts.Logic.PlayerControl.BoosterControl
 {
 
     public class BoosterApplier : MonoBehaviour
