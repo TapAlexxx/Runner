@@ -59,9 +59,13 @@ namespace Scripts.Infrastructure.Bootsrapper
         {
             GameConfig gameConfig = _staticDataService.GetGameConfig();
 
-            string sceneName = gameConfig.CanRunCurrent
+            string sceneName = gameConfig.StartScene;
+            
+#if UNITY_EDITOR
+            sceneName = gameConfig.CanRunCurrent
                 ? SceneManager.GetActiveScene().name
                 : gameConfig.StartScene;
+#endif
             
             _gameStateMachine.Enter<LoadLevelState, string>(sceneName);
         }
