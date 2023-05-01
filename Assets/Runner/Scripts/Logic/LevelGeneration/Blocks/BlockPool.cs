@@ -21,7 +21,9 @@ namespace Scripts.Logic.LevelGeneration.Blocks
         [SerializeField] private List<GameObject> damageBlocks;
         [SerializeField] private int damageCopyCount = 5;
         [SerializeField] private List<GameObject> finishBlocks;
-        [SerializeField] private int finishCopyCount = 5;
+        [SerializeField] private int finishCopyCount = 1;
+        [SerializeField] private List<GameObject> startBlocks;
+        [SerializeField] private int startCopyCount = 1;
 
         [SerializeField] private Booster speedBooster;
         [SerializeField] private Booster shieldBooster;
@@ -33,6 +35,7 @@ namespace Scripts.Logic.LevelGeneration.Blocks
         private List<GameObject> _rightTurnPool;
         private List<GameObject> _damagePool;
         private List<GameObject> _finishPool;
+        private List<GameObject> _startPool;
         private List<GameObject> _speedBoosterPool;
         private List<GameObject> _shieldBoosterPool;
         private List<GameObject> _healBoosterPool;
@@ -44,6 +47,7 @@ namespace Scripts.Logic.LevelGeneration.Blocks
             _rightTurnPool = new List<GameObject>();
             _damagePool = new List<GameObject>();
             _finishPool = new List<GameObject>();
+            _startPool = new List<GameObject>();
             
             _speedBoosterPool = new List<GameObject>();
             _shieldBoosterPool = new List<GameObject>();
@@ -54,6 +58,7 @@ namespace Scripts.Logic.LevelGeneration.Blocks
             FillPool(_rightTurnPool, rightTurnBlocks, rightTurnCopyCount);
             FillPool(_damagePool, damageBlocks, damageCopyCount);
             FillPool(_finishPool, finishBlocks, finishCopyCount);
+            FillPool(_startPool, startBlocks, startCopyCount);
             
             FillPool(_speedBoosterPool, speedBooster, 10);
             FillPool(_shieldBoosterPool, shieldBooster, 10);
@@ -159,6 +164,13 @@ namespace Scripts.Logic.LevelGeneration.Blocks
             _finishPool.Shuffle();
             GetBlockFrom(_finishPool, out finish);
             return finish != null;
+        }
+        
+        public bool TryGetStart(out GameObject start)
+        {
+            _startPool.Shuffle();
+            GetBlockFrom(_startPool, out start);
+            return start != null;
         }
 
         public void Reset()

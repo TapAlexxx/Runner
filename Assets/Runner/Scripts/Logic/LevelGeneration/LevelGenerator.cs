@@ -70,6 +70,15 @@ namespace Scripts.Logic.LevelGeneration
                     PlaceBlock(block, currentDirection, ref currentPosition, ref currentRotation);
                     break;
                 }
+
+                if (i == 0)
+                {
+                    pool.TryGetStart(out GameObject block);
+                    isPrevDefault = false;
+                    PlaceBlock(block, currentDirection, ref currentPosition, ref currentRotation);
+                    continue;
+                }
+
                 if (blockToTurn <= 0)
                 {
                     if (currentTurn == Turn.None)
@@ -118,12 +127,15 @@ namespace Scripts.Logic.LevelGeneration
                     else
                     {
                         pool.TryGetDefault(out block);
-                        if (pool.TryGetBooster(out booster))
+                        if (i > 0)
                         {
-                            booster.transform.parent = block.transform;
-                            booster.transform.position =
-                                block.GetComponentInChildren<DefaultBlock>().BoosterSpawnPoint.position;
-                            booster.gameObject.SetActive(transform);
+                            if (pool.TryGetBooster(out booster))
+                            {
+                                booster.transform.parent = block.transform;
+                                booster.transform.position =
+                                    block.GetComponentInChildren<DefaultBlock>().BoosterSpawnPoint.position;
+                                booster.gameObject.SetActive(transform);
+                            }
                         }
 
                         isPrevDefault = true;
