@@ -81,6 +81,7 @@ namespace Scripts.Infrastructure.Services.Factories.Game
             
             Hud.GetComponentInChildren<TapToPlayButton>().Initialize(Player);
             Hud.GetComponentInChildren<PlayerHealthView>().Initialize(Player);
+            Hud.GetComponentInChildren<PlayerShieldView>().Initialize(Player);
             return Hud;
         }
 

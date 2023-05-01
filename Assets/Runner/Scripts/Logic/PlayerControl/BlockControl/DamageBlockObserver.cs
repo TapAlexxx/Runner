@@ -9,13 +9,17 @@ namespace Scripts.Logic.PlayerControl.BlockControl
     {
         private DamageBlock _lastDamageBlock;
         private int _shieldCount;
+
+        public int ShieldCount => _shieldCount;
         
         public event Action<DamageBlock> PassedBlock;
         public event Action HitDamageBlock;
+        public event Action ShieldCountChanged;
 
         private void Start()
         {
             _shieldCount = 0;
+            ShieldCountChanged?.Invoke();
         }
 
         private void OnTriggerEnter(Collider other)
@@ -26,6 +30,7 @@ namespace Scripts.Logic.PlayerControl.BlockControl
                 if (_shieldCount > 0)
                 {
                     _shieldCount--;
+                    ShieldCountChanged?.Invoke();
                 }
                 else
                 {
@@ -45,6 +50,7 @@ namespace Scripts.Logic.PlayerControl.BlockControl
         public void ActivateShield(int boostValue)
         {
             _shieldCount += boostValue;
+            ShieldCountChanged?.Invoke();
         }
     }
 
