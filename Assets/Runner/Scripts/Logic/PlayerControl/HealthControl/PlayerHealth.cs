@@ -12,7 +12,7 @@ namespace Scripts.Logic.PlayerControl.HealthControl
         
         private int _startHealth;
         public int CurrentHealth { get; private set; }
-
+        public event Action DamageApplied;
         public event Action Dead;
         public event Action Revived;
         public event Action HealthChanged;
@@ -57,6 +57,7 @@ namespace Scripts.Logic.PlayerControl.HealthControl
         {
             CurrentHealth--;
             HealthChanged?.Invoke();
+            DamageApplied?.Invoke();
             ValidateHealth();
         }
 

@@ -96,7 +96,7 @@ namespace Scripts.Logic.PlayerControl.MovementControl
             while (_currentSpeed != 0)
             {
                 Move();
-                _currentSpeed = Mathf.Lerp(_currentSpeed, 0, 2 * Time.deltaTime);
+                _currentSpeed = Mathf.Lerp(_currentSpeed, 0, 2f * Time.deltaTime);
                 yield return null;
             }
         }
